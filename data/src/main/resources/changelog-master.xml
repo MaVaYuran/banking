@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="mariayun">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_role(
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            role VARCHAR(125) NOT NULL
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="mariayun">
+        <sql>
+            INSERT INTO t_role (id, role) VALUES
+            (1, 'ROLE_ADMIN'),
+            (2, 'ROLE_USER');
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="mariayun">
+        <sql>
+            CREATE TABLE IF NOT EXISTS customer(
+            username VARCHAR(125) PRIMARY KEY,
+            pass VARCHAR(125) NOT NULL,
+            first_name VARCHAR(125) NOT NULL,
+            last_name VARCHAR(125) NOT NULL,
+            email VARCHAR(125),
+            t_role_id INT
+                        );
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="mariayun">
+        <sql>
+            INSERT INTO customer (username, pass, first_name, last_name, email, t_role_id) VALUES
+            ('Admin', 'Admin', 'Admin', 'Admin', 'Admin', 1),
+            ('User', 'User', 'User', 'User', 'User', 2);
+        </sql>
+    </changeSet>
+    <changeSet id="5" author="mariayun">
+        <sql>
+            ALTER TABLE customer
+            ADD FOREIGN KEY (t_role_id) REFERENCES t_role (id);
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="6" author="mariayun">
+        <sql>
+            CREATE TABLE IF NOT EXISTS account (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            balance INT,
+            customer_id VARCHAR(125) NOT NULL,
+            FOREIGN KEY (customer_id) REFERENCES customer (username)
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="7" author="mariayun">
+        <sql>
+            CREATE TABLE IF NOT EXISTS card(
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            name VARCHAR(125) NOT NULL,
+            balance INT,
+            account_id INT NOT NULL,
+            FOREIGN KEY (account_id) REFERENCES account (id)
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="8" author="mariayun">
+        <sql>
+            CREATE TABLE IF NOT EXISTS transaction (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            value INT,
+            paydate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            card_id INT NOT NULL,
+            FOREIGN KEY (card_id) REFERENCES card (id)
+            );
+        </sql>
+    </changeSet>
+<!--    <changeSet id="8" author="mariayun">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS card_account-->
+<!--            id INT PRIMARY_KEY,-->
+<!--            balance DECIMAL(10,2),-->
+<!--            card_id INT,-->
+<!--            account_id INT,-->
+<!--            FOREIGN KEY (card_id) REFERENCED card (id),-->
+<!--            FOREIGN KEY (account_id) REFERENCED account (id)-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+
+    <!--    <changeSet id="7" author="mariayun">-->
+    <!--        <sql>-->
+    <!--            CREATE TABLE IF NOT EXISTS message (-->
+    <!--            id INT PRIMARY KEY AUTO_INCREMENT,-->
+    <!--            customer_id VARCHAR(125) NOT NULL,-->
+    <!--            FOREIGN KEY (customer_id) REFERENCES customer (username)-->
+    <!--            );-->
+    <!--        </sql>-->
+    <!--    </changeSet>-->
+</databaseChangeLog>
