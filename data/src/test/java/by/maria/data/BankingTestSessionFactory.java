@@ -1,9 +1,9 @@
-package by.it.academy.data;
+package by.maria.data;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class EShopTestSessionFactory {
+public class BankingTestSessionFactory {
 
     private static SessionFactory sessionFactory;
 

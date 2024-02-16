@@ -1,4 +1,4 @@
-package by.mariayun.service.service;
+package by.mariayun.service;
 
 import by.mariayun.data.dto.UserDepositsDto;
 

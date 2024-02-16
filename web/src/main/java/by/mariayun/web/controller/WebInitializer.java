@@ -1,7 +1,9 @@
-package by.mariayun.web.config;
+package by.mariayun.web.controller;
 
 import by.mariayun.data.DataConfiguration;
 import by.mariayun.service.ServiceConfiguration;
+import by.mariayun.web.rest.RestConfiguration;
+import by.mariayun.web.security.WebSecurityConfig;
 import jakarta.servlet.*;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -17,8 +19,8 @@ public class WebInitializer implements ServletContainerInitializer {
         context.register(WebConfiguration.class);
         context.register(ServiceConfiguration.class);
         context.register(DataConfiguration.class);
-//        context.register(WebSecurityConfig.class);
-//        context.register(RestConfiguration.class);
+        context.register(WebSecurityConfig.class);
+        context.register(RestConfiguration.class);
 
         // Init servlet for Spring MVC
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);

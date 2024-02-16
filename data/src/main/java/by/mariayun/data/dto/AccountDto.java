@@ -1,25 +1,19 @@
-package by.mariayun.data.entity;
+package by.mariayun.data.dto;
 
+import by.mariayun.data.entity.Customer;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
-@Table(name = "account")
-public class Account implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AccountDto implements Serializable {
+
     private int id;
+    private Integer balance;
+    private String customerId;
 
-    @Column(name = "balance")
-    private BigDecimal balance;
-
-    @ManyToOne
-    @JoinColumn(name="customer_id", referencedColumnName = "username")
-    Customer customer;
 
     public int getId() {
         return id;
@@ -29,39 +23,20 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Account account = (Account) o;
-
-        if (id != account.id) return false;
-        if (!Objects.equals(balance, account.balance)) return false;
-        return Objects.equals(customer, account.customer);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (balance != null ? balance.hashCode() : 0);
-        result = 31 * result + (customer != null ? customer.hashCode() : 0);
-        return result;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 }
+

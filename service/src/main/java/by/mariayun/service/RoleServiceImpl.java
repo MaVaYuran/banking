@@ -1,13 +1,14 @@
-package by.mariayun.service.service;
+package by.mariayun.service;
 
 import by.mariayun.data.dao.RoleDao;
 import by.mariayun.data.dto.RoleDto;
+import by.mariayun.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
     private final RoleDao roleDao;
 

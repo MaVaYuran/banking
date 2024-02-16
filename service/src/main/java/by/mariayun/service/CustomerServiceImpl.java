@@ -1,8 +1,9 @@
-package by.mariayun.service.service;
+package by.mariayun.service;
 
 import by.mariayun.data.dao.CustomerDao;
 import by.mariayun.data.dto.AccountDto;
 import by.mariayun.data.dto.CustomerDto;
+import by.mariayun.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
     private final CustomerDao customerDAO ;
 
     @Autowired

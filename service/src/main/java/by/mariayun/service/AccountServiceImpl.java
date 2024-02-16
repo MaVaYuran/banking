@@ -1,14 +1,15 @@
-package by.mariayun.service.service;
+package by.mariayun.service;
 
 import by.mariayun.data.dao.AccountDao;
 import by.mariayun.data.dto.AccountDto;
+import by.mariayun.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
     private final AccountDao accountDao;
 

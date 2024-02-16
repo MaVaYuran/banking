@@ -1,56 +1,28 @@
-package by.mariayun.data.entity;
+package by.mariayun.data.dto;
 
+import by.mariayun.data.entity.Account;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "customer")
-public class Customer {
-    @Id
-//@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "username")
+
+public class CustomerDto implements Serializable {
+
     private String username;
-
-    @Column(name = "pass")
     private String password;
-
-    @Column(name = "first_name")
     private String firstName;
-
-    @Column(name = "last_name")
     private String lastName;
-
-    @Column(name = "email")
     private String email;
+    private int roleId;
 
-    @OneToMany(mappedBy = "customer")
-    List<Account> accounts;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Customer customer = (Customer) o;
-
-        if (!Objects.equals(username, customer.username)) return false;
-        if (!Objects.equals(password, customer.password)) return false;
-        if (!Objects.equals(firstName, customer.firstName)) return false;
-        if (!Objects.equals(lastName, customer.lastName)) return false;
-        if (!Objects.equals(email, customer.email)) return false;
-        return Objects.equals(accounts, customer.accounts);
+    public int getRoleId() {
+        return roleId;
     }
 
-    @Override
-    public int hashCode() {
-        int result = username != null ? username.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (accounts != null ? accounts.hashCode() : 0);
-        return result;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getUsername() {
@@ -93,13 +65,6 @@ public class Customer {
         this.email = email;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
 
     // Getters and Setters
     // (Omitted for brevity)

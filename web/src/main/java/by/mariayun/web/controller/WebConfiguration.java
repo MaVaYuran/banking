@@ -1,4 +1,4 @@
-package by.mariayun.web.config;
+package by.mariayun.web.controller;
 
 import by.mariayun.service.ServiceConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(basePackages = "by.mariayun.web")
+@ComponentScan(basePackages = "by.mariayun.web.controller")
 @Import(ServiceConfiguration.class)
 @EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
