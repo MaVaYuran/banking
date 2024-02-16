@@ -21,7 +21,7 @@ public class MessageDaoImpl implements MessageDao {
     }
 
     @Override
-    public Long saveNewMessage(Message message) {
+    public int saveNewMessage(Message message) {
         Session session = sessionFactory.getCurrentSession();
         session.persist(message);//Some work
         return message.getId();
@@ -30,7 +30,7 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     @Transactional(readOnly = true)
-    public Message readMessageById(Long id) {
+    public Message readMessageById(int id) {
         Session session;
         Message message;
         session = sessionFactory.getCurrentSession();
@@ -40,7 +40,7 @@ public class MessageDaoImpl implements MessageDao {
     }
 
     @Override
-    public boolean deleteMessageById(Long id) {
+    public boolean deleteMessageById(int id) {
         Session session;
         Message message;
         session = sessionFactory.getCurrentSession();

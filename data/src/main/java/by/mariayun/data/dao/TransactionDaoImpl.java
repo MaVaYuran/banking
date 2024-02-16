@@ -3,12 +3,17 @@ package by.mariayun.data.dao;
 import by.mariayun.data.dto.TransactionDto;
 import by.mariayun.data.entity.Card;
 import by.mariayun.data.entity.Transaction;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
+@Transactional
 public class TransactionDaoImpl implements TransactionDao {
     private final SessionFactory sessionFactory;
 

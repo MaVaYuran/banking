@@ -2,6 +2,9 @@ package by.mariayun.web.security;
 
 import by.mariayun.data.DataConfiguration;
 import by.mariayun.service.ServiceConfiguration;
+import jakarta.servlet.ServletContainerInitializer;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -13,6 +16,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import java.util.Set;
 
 @Configuration
 @Import({DataConfiguration.class, ServiceConfiguration.class})
@@ -32,8 +37,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/static/**", "/WEB-INF/view/**", "/request").permitAll()
                         .requestMatchers("/login", "/api/**", "/register").anonymous()
-                        .requestMatchers("/logout", "/home", "/deposits", "/addDeposit").authenticated()
-                        .requestMatchers("/add**", "/delete**", "/update**", "/callback-result").hasRole("ADMIN")
+                        .requestMatchers("/logout", "/home").authenticated()
+                        .requestMatchers("/add**", "/delete**", "/update**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .logout(Customizer.withDefaults())
@@ -46,4 +51,5 @@ public class WebSecurityConfig {
 
         return new HandlerMappingIntrospector();
     }
+
 }

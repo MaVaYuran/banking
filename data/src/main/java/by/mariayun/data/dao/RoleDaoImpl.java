@@ -3,13 +3,16 @@ package by.mariayun.data.dao;
 import by.mariayun.data.dto.RoleDto;
 import by.mariayun.data.entity.Customer;
 import by.mariayun.data.entity.Role;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
+@Transactional
 public class RoleDaoImpl implements RoleDao {
 
     private final SessionFactory sessionFactory;

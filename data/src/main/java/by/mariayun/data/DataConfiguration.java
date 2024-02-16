@@ -1,9 +1,6 @@
 package by.mariayun.data;
 
-import by.mariayun.data.entity.Account;
-import by.mariayun.data.entity.Customer;
-import by.mariayun.data.entity.Message;
-import by.mariayun.data.entity.Role;
+import by.mariayun.data.entity.*;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -73,7 +70,9 @@ public class DataConfiguration {
                 Account.class,
                 Customer.class,
                 Role.class,
-                Message.class
+                Message.class,
+                Card.class,
+                Transaction.class
         );
         return sessionFactory;
     }

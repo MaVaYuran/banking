@@ -2,19 +2,21 @@ package by.mariayun.data.dao;
 
 import by.mariayun.data.EBankingDataSource;
 import by.mariayun.data.entity.Card;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
+@Transactional
 public class CardDaoImpl implements CardDao {
     private final SessionFactory sessionFactory;
 

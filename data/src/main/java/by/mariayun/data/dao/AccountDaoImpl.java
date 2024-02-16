@@ -3,13 +3,17 @@ package by.mariayun.data.dao;
 import by.mariayun.data.dto.AccountDto;
 import by.mariayun.data.entity.Account;
 import by.mariayun.data.entity.Customer;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
+@Transactional
 public class AccountDaoImpl implements AccountDao {
 
     private final SessionFactory sessionFactory;

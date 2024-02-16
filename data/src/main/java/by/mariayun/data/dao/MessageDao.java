@@ -5,11 +5,11 @@ import by.mariayun.data.entity.Message;
 import java.util.List;
 
 public interface MessageDao {
-    Long saveNewMessage(Message message);
+    int saveNewMessage(Message message);
 
-    Message readMessageById(Long id);
+    Message readMessageById(int id);
 
-    boolean deleteMessageById(Long id);
+    boolean deleteMessageById(int id);
 
     List<Message> readAll();
 }

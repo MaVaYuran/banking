@@ -4,15 +4,18 @@ import by.mariayun.data.dto.AccountDto;
 import by.mariayun.data.dto.CustomerDto;
 import by.mariayun.data.entity.Customer;
 import by.mariayun.data.entity.Role;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Repository
+@Transactional
 public class CustomerDaoImpl implements CustomerDao {
 
     private final SessionFactory sessionFactory;
