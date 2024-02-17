@@ -4,25 +4,18 @@ import by.mariayun.data.dao.CardDao;
 import by.mariayun.data.dto.CardDto;
 import by.mariayun.data.entity.Card;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class CardServiceImpl implements CardService {
     private final CardDao cardDao;
-    CardDto cardDto;
-
-    @Autowired
-    public CardServiceImpl(CardDao cardDao, CardDto cardDto) {
-        this.cardDao = cardDao;
-        this.cardDto = cardDto;
-    }
-
-    @Autowired
+@Autowired
     public CardServiceImpl(CardDao cardDao) {
         this.cardDao = cardDao;
-
     }
 
     @Override
