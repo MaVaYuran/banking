@@ -1,9 +1,9 @@
-package by.mariayun.web.controller;
+package by.mariayun.web;
 
 import by.mariayun.data.DataConfiguration;
 import by.mariayun.service.ServiceConfiguration;
-import by.mariayun.web.rest.RestConfiguration;
-import by.mariayun.web.security.WebSecurityConfig;
+import by.mariayun.rest.RestConfiguration;
+import by.mariayun.secutiry.WebSecurityConfig;
 import jakarta.servlet.*;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;

@@ -11,9 +11,9 @@
   <body>
 <nav class="nav">
     <a class="nav-link" href="/bweb">Home</a>
-    <a class="nav-link active" aria-current="page" href="/bweb/register">Registert</a>
+    <a class="nav-link active" aria-current="page" href="/bweb/register">Register</a>
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-    <a class="nav-link active" aria-current="page" href="/bweb/add">Add a New Product</a>
+    <a class="nav-link active" aria-current="page" href="/bweb/add">Admin</a>
 </sec:authorize>
     <a class="nav-link disabled" aria-disabled="true">Help</a>
 <sec:authorize access="isAuthenticated()">

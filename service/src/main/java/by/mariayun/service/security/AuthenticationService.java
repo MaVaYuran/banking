@@ -36,7 +36,7 @@ public class AuthenticationService implements UserDetailsService {
                     List.of(new SimpleGrantedAuthority(customer.getRole().getRole()))
             );
         } catch (Exception e) {
-            throw new UsernameNotFoundException("Username not found " + username, e);
+            throw new UsernameNotFoundException("User not found " + username, e);
         }
     }
 

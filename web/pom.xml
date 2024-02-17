@@ -143,7 +143,7 @@
                     <apiSources>
                         <apiSource>
                             <springmvc>true</springmvc>
-                            <locations>by.mariayun.web.rest</locations>
+                            <locations>by.mariayun.rest</locations>
                             <schemes>http</schemes>
                             <host>localhost:8080</host>
                             <basePath>/bweb</basePath>

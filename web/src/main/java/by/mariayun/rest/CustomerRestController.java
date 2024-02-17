@@ -1,4 +1,4 @@
-package by.mariayun.web.rest;
+package by.mariayun.rest;
 
 
 import by.mariayun.data.dao.CustomerDao;

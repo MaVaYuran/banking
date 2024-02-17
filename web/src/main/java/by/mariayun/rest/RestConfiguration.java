@@ -1,4 +1,4 @@
-package by.mariayun.web.rest;
+package by.mariayun.rest;
 
 import by.mariayun.data.DataConfiguration;
 import by.mariayun.data.dao.CustomerDao;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Configuration
-@ComponentScan(basePackages = "by.mariayun.web.rest")
+@ComponentScan(basePackages = "by.mariayun.rest")
 @Import(DataConfiguration.class)
 public class RestConfiguration {
 }

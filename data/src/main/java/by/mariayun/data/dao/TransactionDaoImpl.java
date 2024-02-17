@@ -24,12 +24,12 @@ public class TransactionDaoImpl implements TransactionDao {
     @Override
     public List<TransactionDto> getTransactions() {
         Session session = sessionFactory.getCurrentSession();
-        List<Transaction> transactions = session.createQuery("FROM transaction").getResultList();
+        List<Transaction> transactions = session.createQuery("FROM transaction", Transaction.class).getResultList();
 
-        return convertToDtoList(transactions);
+        return mapToDtoList(transactions);
     }
 
-    private List<TransactionDto> convertToDtoList(List<Transaction> transactions) {
+    private List<TransactionDto> mapToDtoList(List<Transaction> transactions) {
         Session session = sessionFactory.getCurrentSession();
         List<TransactionDto> dtoList = new ArrayList<>();
         for (Transaction transaction : transactions) {

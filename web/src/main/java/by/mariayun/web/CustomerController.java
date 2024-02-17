@@ -1,4 +1,4 @@
-package by.mariayun.web.controller;
+package by.mariayun.web;
 
 
 import by.mariayun.data.dto.AccountDto;

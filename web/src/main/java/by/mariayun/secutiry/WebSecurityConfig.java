@@ -1,4 +1,4 @@
-package by.mariayun.web.security;
+package by.mariayun.secutiry;
 
 import by.mariayun.data.DataConfiguration;
 import by.mariayun.service.ServiceConfiguration;
@@ -35,9 +35,9 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/static/**", "/WEB-INF/view/**", "/request").permitAll()
+                        .requestMatchers("/","/index", "/static/**", "/WEB-INF/view/**").permitAll()
                         .requestMatchers("/login", "/api/**", "/register").anonymous()
-                        .requestMatchers("/logout", "/home").authenticated()
+                        .requestMatchers("/logout").authenticated()
                         .requestMatchers("/add**", "/delete**", "/update**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

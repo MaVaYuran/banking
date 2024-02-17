@@ -43,10 +43,10 @@ public class CustomerDaoImpl implements CustomerDao {
     private CustomerDto convertToDto(Customer customer) {
         CustomerDto customerDto = new CustomerDto();
         customerDto.setUsername(customer.getUsername());
+        customerDto.setPassword(customer.getPassword());
         customerDto.setFirstName(customer.getFirstName());
         customerDto.setLastName(customer.getLastName());
         customerDto.setEmail(customer.getEmail());
-        customerDto.setPassword(customer.getPassword());
         customerDto.setRoleId(customer.getRole().getId());
 
         return customerDto;
@@ -65,18 +65,16 @@ public class CustomerDaoImpl implements CustomerDao {
     public String addCustomer(CustomerDto customerDto) {
         Session session = this.sessionFactory.getCurrentSession();
         Customer customer = mapToEntity(customerDto);
-
         return (String) session.save(customer);
     }
 
     private Customer mapToEntity(CustomerDto customerDto) {
         Customer customer = new Customer();
         customer.setUsername(customerDto.getUsername());
+        customer.setPassword(customerDto.getPassword());
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
         customer.setEmail(customerDto.getEmail());
-        customer.setPassword(customerDto.getPassword());
-
         Session session = this.sessionFactory.getCurrentSession();
         Role role = session.get(Role.class, customerDto.getRoleId());
         if (role != null) {
@@ -90,10 +88,10 @@ public class CustomerDaoImpl implements CustomerDao {
         Session session = sessionFactory.getCurrentSession();
         Customer customer = session.get(Customer.class, customerDto.getUsername());
         if (customer != null) {
+            customer.setPassword(customerDto.getPassword());
             customer.setFirstName(customerDto.getFirstName());
             customer.setLastName(customerDto.getLastName());
             customer.setEmail(customerDto.getEmail());
-            customer.setPassword(customerDto.getPassword());
             session = this.sessionFactory.getCurrentSession();
             Role role = session.get(Role.class, customerDto.getRoleId());
             if(role != null) {
@@ -117,12 +115,10 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public Customer getUserByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
-        Query<Customer> query = session.createQuery("FROM Customer WHERE username = :username", Customer.class);
+        Query<Customer> query = session.createQuery("FROM Сustomer WHERE username = :username", Customer.class);
         query.setParameter("username", username);
         return query.uniqueResult();
 
-//        Customer customer = session.get(Customer.class, username);
-//        return Optional.ofNullable(customer).orElse(null);
     }
 
     @Override

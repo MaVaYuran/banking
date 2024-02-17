@@ -40,13 +40,8 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public int addRole(RoleDto roleDto) {
-        Session session = this.sessionFactory.getCurrentSession();//???
-        Role role = new Role();
-        role.setRole(roleDto.getRole());
-        session = this.sessionFactory.getCurrentSession();
-        Customer customer = session.get(Customer.class, roleDto.getCustomerId());
-        if (customer != null) ;
-        role.setCustomer(customer);
+        Session session = this.sessionFactory.getCurrentSession();
+        Role role = convertToEntity(roleDto);
         return (int) session.save(role);
     }
 
@@ -86,16 +81,16 @@ public class RoleDaoImpl implements RoleDao {
         }
         return roleDtos;
     }
-//   for addRole method
-//    private Role convertToEntity(RoleDto roleDto) {
-//        Role role = new Role();
-//        role.setRole(roleDto.getRole());
-//        var session = sessionFactory.getCurrentSession();
-//        var customer = session.get(Customer.class, roleDto.getCustomerId());
-//        if (customer != null) {
-//            role.setCustomer(customer);
-//        }
-//        return role;
-//    }
+
+    private Role convertToEntity(RoleDto roleDto) {
+        Role role = new Role();
+        role.setRole(roleDto.getRole());
+        var session = sessionFactory.getCurrentSession();
+        var customer = session.get(Customer.class, roleDto.getCustomerId());
+        if (customer != null) {
+            role.setCustomer(customer);
+        }
+        return role;
+    }
 
 }

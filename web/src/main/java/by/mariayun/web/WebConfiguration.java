@@ -1,4 +1,4 @@
-package by.mariayun.web.controller;
+package by.mariayun.web;
 
 import by.mariayun.service.ServiceConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -11,9 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(basePackages = "by.mariayun.web.controller")
+@ComponentScan(basePackages = "by.mariayun.web")
 @Import(ServiceConfiguration.class)
-@EnableWebMvc
+//@EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
     @Bean
     @SuppressWarnings("unused")
@@ -24,12 +24,12 @@ public class WebConfiguration implements WebMvcConfigurer {
         return resolver;
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("*.html")
-                .addResourceLocations("/");
-
-        registry.addResourceHandler("/static/img/*.jpg")
-                .addResourceLocations("/static/img/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("*.html")
+//                .addResourceLocations("/");
+//
+//        registry.addResourceHandler("/static/img/*.jpg")
+//                .addResourceLocations("/static/img/");
+//    }
 }

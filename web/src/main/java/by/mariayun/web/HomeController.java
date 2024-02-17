@@ -1,4 +1,4 @@
-package by.mariayun.web.controller;
+package by.mariayun.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
