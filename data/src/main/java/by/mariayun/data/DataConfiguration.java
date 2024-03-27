@@ -11,10 +11,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.*;
+import org.springframework.transaction.*;
 
 import javax.sql.DataSource;
 import java.util.Properties;
+
+
 
 @Configuration
 @ComponentScan(basePackages = "by.mariayun.data")
@@ -22,6 +25,7 @@ import java.util.Properties;
         "classpath:liquibase.properties",
         "classpath:hibernate.properties"
 })
+@EnableTransactionManagement
 public class DataConfiguration {
     @Bean
     public Properties hibernateProperties(
@@ -41,7 +45,7 @@ public class DataConfiguration {
     public DataSource dataSource(
             @Value("${url}") String url,
             @Value("${driver}") String driverClassName,
-            @Value("user") String userName,
+            @Value("root") String userName,
             @Value("${password}") String password,
             @Value("true") boolean removeAbandonedOnBorrow,
             @Value("10") int initialSize,
@@ -69,10 +73,10 @@ public class DataConfiguration {
         sessionFactory.setAnnotatedClasses(
                 Account.class,
                 Customer.class,
-                Role.class,
-                Message.class,
-                Card.class,
-                Transaction.class
+                Role.class
+//                Message.class,
+//                Card.class,
+//                Transaction.class
         );
         return sessionFactory;
     }

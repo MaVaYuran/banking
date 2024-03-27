@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -27,7 +28,7 @@ public class AuthenticationService implements UserDetailsService {
         try {
             Customer customer = customerDAO.getUserByUsername(username);
             if (customer == null) {
-                throw new UsernameNotFoundException("User not found");
+                throw new UsernameNotFoundException(String.format("User '%s' not found", username));
             }
             return new User(
                     customer.getUsername(),
@@ -36,7 +37,7 @@ public class AuthenticationService implements UserDetailsService {
                     List.of(new SimpleGrantedAuthority(customer.getRole().getRole()))
             );
         } catch (Exception e) {
-            throw new UsernameNotFoundException("User not found " + username, e);
+            throw new UsernameNotFoundException(String.format("User '%s' not found " , username));
         }
     }
 
@@ -44,8 +45,8 @@ public class AuthenticationService implements UserDetailsService {
         customerDto.setUsername(username);
         customerDto.setRoleId(2);
 
-        String customerId = customerDAO.addCustomer(customerDto);
-        return customerDAO.getCustomerByUsername(customerId);
+        int customerId = customerDAO.addCustomer(customerDto);
+        return customerDAO.getById(customerId);
 
     }
 
@@ -53,14 +54,16 @@ public class AuthenticationService implements UserDetailsService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             String username = authentication.getName();
-            var customer = customerDAO.getUserByUsername(username);
+            Customer customer = customerDAO.getUserByUsername(username);
             if (customer != null) {
                 CustomerDto customerDto = new CustomerDto();
+                customerDto.setId(customer.getId());
                 customerDto.setUsername(customer.getUsername());
                 customerDto.setPassword(customer.getPassword());
-                customerDto.setFirstName(customer.getFirstName());
-                customerDto.setLastName(customer.getLastName());
+                customerDto.setFirstname(customer.getFirstname());
+                customerDto.setLastname(customer.getLastname());
                 customerDto.setEmail(customer.getEmail());
+                customerDto.setRoleId(customer.getRole().getId());
                 return customerDto;
             }
         }

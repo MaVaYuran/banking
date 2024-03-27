@@ -18,7 +18,7 @@ public class Account implements Serializable {
     private Integer balance;
 
     @ManyToOne
-    @JoinColumn(name="customer_id", referencedColumnName = "username")
+    @JoinColumn(name="customer_id", referencedColumnName = "id")
     Customer customer;
 
     public int getId() {

@@ -3,11 +3,12 @@ package by.mariayun.data.dao;
 import by.mariayun.data.dto.AccountDto;
 import by.mariayun.data.entity.Account;
 import by.mariayun.data.entity.Customer;
-import jakarta.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class AccountDaoImpl implements AccountDao {
         AccountDto accountDto = new AccountDto();
         accountDto.setId(account.getId());
         accountDto.setBalance(account.getBalance());
-        accountDto.setCustomerId(account.getCustomer().getUsername());
+        accountDto.setCustomerId(account.getCustomer().getId());
         return accountDto;
     }
 
@@ -77,7 +78,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public void updateAccount(AccountDto accountDto) {
         Session session = sessionFactory.getCurrentSession();
-        Account account = session.get(Account.class, accountDto.getCustomerId());
+        Account account = session.get(Account.class, accountDto.getId());
         if (account != null) {
             account.setBalance(accountDto.getBalance());
             session = this.sessionFactory.getCurrentSession();

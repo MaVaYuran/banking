@@ -3,6 +3,7 @@ package by.mariayun.service;
 import by.mariayun.data.dao.CustomerDao;
 import by.mariayun.data.dto.AccountDto;
 import by.mariayun.data.dto.CustomerDto;
+import by.mariayun.data.entity.Customer;
 import by.mariayun.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto getCustomerByUsername(String username) {
-        return customerDAO.getCustomerByUsername(username);
+    public CustomerDto getCustomerById(int id) {
+        return customerDAO.getById(id);
     }
 
     @Override
-    public String addCustomer(CustomerDto customerDto) {
+    public int addCustomer(CustomerDto customerDto) {
         return customerDAO.addCustomer(customerDto);
     }
 
@@ -41,12 +42,17 @@ customerDAO.updateCustomer(customerDto);
     }
 
     @Override
-    public boolean deleteCustomer(String username) {
+    public boolean deleteCustomer(int username) {
         return customerDAO.deleteCustomer(username);
     }
 
     @Override
-    public List<AccountDto> getAllAccounts(String customerId) {
+    public Customer getUserByUsername(String username) {
+        return customerDAO.getUserByUsername(username);
+    }
+
+    @Override
+    public List<AccountDto> getAllAccounts(int customerId) {
         return customerDAO.getAllAccounts(customerId);
     }
 }

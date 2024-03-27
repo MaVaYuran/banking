@@ -11,8 +11,8 @@
      <p class="text-success" style="font-size: 1.5rem;"><a href="/bweb/feedback"> Feedback</a></p>
  </sec:authorize>
  <sec:authorize access="hasRole('ROLE_ADMIN')">
-     <p class="text-success" style="font-size: 1.5rem;"><a href="/bweb/exchange-rates">Update exchange rate</a></p>
+     <p class="text-success" style="font-size: 1.5rem;"><a href="/bweb/users">Watch users</a></p>
  </sec:authorize>
                <br>
-  <!--  <a href="/bweb/deposits/${account.id}" class="btn btn-primary">Mamma mia</a>-->
+   <a href="/bweb/deposits/${account.id}" class="btn btn-primary">Mamma mia</a>
 </div>

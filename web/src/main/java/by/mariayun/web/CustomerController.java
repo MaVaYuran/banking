@@ -63,7 +63,7 @@ public class CustomerController {
         CustomerDto customerDto = authenticationService.getCustomer();
         if (customerDto != null) {
             model.addAttribute("customer", customerDto);
-            List<AccountDto> accounts = customerService.getAllAccounts(customerDto.getUsername());
+            List<AccountDto> accounts = customerService.getAllAccounts(customerDto.getId());
             if (!accounts.isEmpty()) {
                 model.addAttribute("account", accounts.get(0));
             }

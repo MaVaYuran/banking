@@ -5,7 +5,7 @@ import java.io.Serializable;
 public final class RoleDto implements Serializable {
     private int id;
     private String role;
-    private String customerId;
+    private int customerId;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public final class RoleDto implements Serializable {
         this.role = role;
     }
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 }

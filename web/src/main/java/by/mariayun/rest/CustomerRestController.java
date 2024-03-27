@@ -17,9 +17,9 @@ public class CustomerRestController {
     CustomerDao customerDao;
 
 
-    @GetMapping("/api/users/{id}")
-    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable("id") String id) {
-        CustomerDto customer = customerDao.getCustomerByUsername(id);
+    @GetMapping("/api/customers/{id}")
+    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable("id") int id) {
+        CustomerDto customer = customerDao.getById(id);
         if (customer != null) {
             return ResponseEntity.ok(customer);
         } else {
@@ -27,38 +27,38 @@ public class CustomerRestController {
         }
     }
 
-    @PostMapping("/api/users/{id}")
+    @PostMapping("/api/customers/{id}")
     public CustomerDto crateCustomer(
-            @PathVariable("id") String id,
+            @PathVariable("id") int id,
             @RequestBody CustomerDto customerDto) {
 
-        customerDto.setUsername(id);
-        String customerId = customerDao.addCustomer(customerDto);
-        return customerDao.getCustomerByUsername(customerId);
+        customerDto.setId(id);
+        int customerId = customerDao.addCustomer(customerDto);
+        return customerDao.getById(customerId);
     }
 
-    @PutMapping("/api/users/{id}")
+    @PutMapping("/api/customers/{id}")
     @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
     public CustomerDto updateCustomer(
-            @PathVariable("id") String id,
+            @PathVariable("id") int id,
             @RequestBody CustomerDto customerDto) {
         customerDao.updateCustomer(customerDto);
-        return customerDao.getCustomerByUsername(id);
+        return customerDao.getById(id);
 
     }
 
-    @DeleteMapping("/api/useers/{userId}")
+    @DeleteMapping("/api/customers/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCustomer(
-            @PathVariable("id") String id) {
+            @PathVariable("id") int id) {
         customerDao.deleteCustomer(id);
     }
 
-    @GetMapping("/api/users/{userId}/accounts")
+    @GetMapping("/api/customers/{customerId}/accounts")
     public List<AccountDto> getCustomerAccounts(
-            @PathVariable String userId
+            @PathVariable int customerId
     ) {
-        return customerDao.getAllAccounts(userId);
+        return customerDao.getAllAccounts(customerId);
     }
 }
 

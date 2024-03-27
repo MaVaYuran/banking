@@ -11,12 +11,12 @@
         <property name="hibernate.show_sql">true</property>
         <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
 
-        <mapping class="by.mariayun.data.entity.Message"/>
+<!--        <mapping class="by.mariayun.data.entity.Message"/>-->
         <mapping class="by.mariayun.data.entity.Customer"/>
         <mapping class="by.mariayun.data.entity.Role"/>
-        <mapping class="by.mariayun.data.entity.Card"/>
+<!--        <mapping class="by.mariayun.data.entity.Card"/>-->
         <mapping class="by.mariayun.data.entity.Account"/>
-        <mapping class="by.mariayun.data.entity.Transaction"/>
+
 
 
 

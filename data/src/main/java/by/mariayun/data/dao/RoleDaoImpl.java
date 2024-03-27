@@ -3,18 +3,16 @@ package by.mariayun.data.dao;
 import by.mariayun.data.dto.RoleDto;
 import by.mariayun.data.entity.Customer;
 import by.mariayun.data.entity.Role;
-import jakarta.transaction.Transactional;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
-import org.springframework.stereotype.Repository;
+import org.hibernate.*;
+import org.hibernate.query.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 @Repository
 @Transactional
 public class RoleDaoImpl implements RoleDao {
-
     private final SessionFactory sessionFactory;
 
     public RoleDaoImpl(SessionFactory sessionFactory) {
@@ -22,20 +20,19 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
+    public ArrayList<RoleDto> getAllRoles() {
+        List<Role> roleList = getRoleList();
+        return convertToDtoList(roleList);
+    }
+
+    @Override
     public RoleDto getRoleById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Role role = session.get(Role.class, id);
         if (role != null) {
-            convertToDto(role);
+            return convertToDto(role);
         }
         return null;
-    }
-    private RoleDto convertToDto(Role role) {
-        RoleDto roleDto = new RoleDto();
-        roleDto.setId(role.getId());
-        roleDto.setRole(role.getRole());
-        roleDto.setCustomerId(role.getCustomer().getUsername());
-        return roleDto;
     }
 
     @Override
@@ -47,50 +44,46 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public boolean deleteRole(int id) {
-
         Session session = sessionFactory.getCurrentSession();
         Role role = session.get(Role.class, id);
         if (role != null) {
             session.delete(role);
             return true;
-
         } else {
-            throw new IllegalArgumentException("Role " + id + " not found");
+            throw new IllegalArgumentException("Role with id " + id + " not found");
         }
-
-    }
-
-    @Override
-    public List<RoleDto> getAllRoles() {
-        Session session = sessionFactory.getCurrentSession();
-        List<Role> roles = getRoleList();
-        return convertToDtoList(roles);
     }
 
     private List<Role> getRoleList() {
-        var session = sessionFactory.getCurrentSession();
-        Query<Role> query = session.createQuery("FROM t_role", Role.class);
+        Session session = sessionFactory.getCurrentSession();
+        Query<Role> query = session.createQuery("FROM Role", Role.class);
         return query.list();
     }
 
+    private RoleDto convertToDto(Role role) {
+        RoleDto roleDto = new RoleDto();
+        roleDto.setId(role.getId());
+        roleDto.setRole(role.getRole());
+        roleDto.setCustomerId(role.getCustomer().getId());
+        return roleDto;
+    }
 
-    private ArrayList<RoleDto> convertToDtoList(List<Role> roles) {
-        ArrayList<RoleDto> roleDtos = new ArrayList<>();
-        for (Role role : roles) {
-            roleDtos.add(convertToDto(role));
+    private ArrayList<RoleDto> convertToDtoList(List<Role> roleList) {
+        ArrayList<RoleDto> roleDtoList = new ArrayList<>();
+        for (Role role : roleList) {
+            roleDtoList.add(convertToDto(role));
         }
-        return roleDtos;
+        return roleDtoList;
     }
 
     private Role convertToEntity(RoleDto roleDto) {
         Role role = new Role();
         role.setRole(roleDto.getRole());
-        var session = sessionFactory.getCurrentSession();
-        var customer = session.get(Customer.class, roleDto.getCustomerId());
-        if (customer != null) {
-            role.setCustomer(customer);
+        Session session = this.sessionFactory.getCurrentSession();
+        Customer user = session.get(Customer.class, roleDto.getCustomerId());
+        if (user != null) {
+            role.setCustomer(user);
         }
         return role;
     }
-
 }

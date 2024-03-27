@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <%@include file="header.jsp"%>
 
-<h1><c:out value="Hello!"/></h1>
+<h1><c:out value="We are happy to see you in our bank!"/></h1>
 
 <img src="/bweb/static/img/image1.jpg" alt="no image"/>
 

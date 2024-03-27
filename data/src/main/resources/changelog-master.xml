@@ -26,10 +26,11 @@
     <changeSet id="3" author="mariayun">
         <sql>
             CREATE TABLE IF NOT EXISTS customer(
-            username VARCHAR(125) PRIMARY KEY,
-            pass VARCHAR(125) NOT NULL,
-            first_name VARCHAR(125) NOT NULL,
-            last_name VARCHAR(125) NOT NULL,
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            username VARCHAR(125) NOT NULL,
+            password VARCHAR(125) NOT NULL,
+            firstname VARCHAR(125),
+            lastname VARCHAR(125),
             email VARCHAR(125),
             t_role_id INT
                         );
@@ -38,9 +39,9 @@
 
     <changeSet id="4" author="mariayun">
         <sql>
-            INSERT INTO customer (username, pass, first_name, last_name, email, t_role_id) VALUES
-            ('Admin', 'Admin', 'Admin', 'Admin', 'Admin', 1),
-            ('User', 'User', 'User', 'User', 'User', 2);
+            INSERT INTO customer (id, username, password, firstname, lastname, email, t_role_id) VALUES
+            (1, 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 1),
+            (2, 'User', 'User', 'User', 'User', 'User', 2);
         </sql>
     </changeSet>
     <changeSet id="5" author="mariayun">
@@ -56,33 +57,33 @@
             CREATE TABLE IF NOT EXISTS account (
             id INT PRIMARY KEY AUTO_INCREMENT,
             balance INT,
-            customer_id VARCHAR(125) NOT NULL,
-            FOREIGN KEY (customer_id) REFERENCES customer (username)
+            customer_id INT NOT NULL,
+            FOREIGN KEY (customer_id) REFERENCES customer (id)
             );
         </sql>
     </changeSet>
-    <changeSet id="7" author="mariayun">
-        <sql>
-            CREATE TABLE IF NOT EXISTS card(
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            name VARCHAR(125) NOT NULL,
-            balance INT,
-            account_id INT NOT NULL,
-            FOREIGN KEY (account_id) REFERENCES account (id)
-            );
-        </sql>
-    </changeSet>
-    <changeSet id="8" author="mariayun">
-        <sql>
-            CREATE TABLE IF NOT EXISTS transaction (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            value INT,
-            paydate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            card_id INT NOT NULL,
-            FOREIGN KEY (card_id) REFERENCES card (id)
-            );
-        </sql>
-    </changeSet>
+<!--    <changeSet id="7" author="mariayun">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS card(-->
+<!--            id INT PRIMARY KEY AUTO_INCREMENT,-->
+<!--            name VARCHAR(125) NOT NULL,-->
+<!--            balance INT,-->
+<!--            account_id INT NOT NULL,-->
+<!--            FOREIGN KEY (account_id) REFERENCES account (id)-->
+<!--            );-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="8" author="mariayun">-->
+<!--        <sql>-->
+<!--            CREATE TABLE IF NOT EXISTS transaction (-->
+<!--            id INT PRIMARY KEY AUTO_INCREMENT,-->
+<!--            value INT,-->
+<!--            paydate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,-->
+<!--            card_id INT NOT NULL,-->
+<!--            FOREIGN KEY (card_id) REFERENCES card (id)-->
+<!--            );-->
+<!--        </sql>-->
+<!--    </changeSet>-->
 <!--    <changeSet id="8" author="mariayun">-->
 <!--        <sql>-->
 <!--            CREATE TABLE IF NOT EXISTS card_account-->
@@ -94,14 +95,13 @@
 <!--            FOREIGN KEY (account_id) REFERENCED account (id)-->
 <!--        </sql>-->
 <!--    </changeSet>-->
-
-    <!--    <changeSet id="7" author="mariayun">-->
-    <!--        <sql>-->
-    <!--            CREATE TABLE IF NOT EXISTS message (-->
-    <!--            id INT PRIMARY KEY AUTO_INCREMENT,-->
-    <!--            customer_id VARCHAR(125) NOT NULL,-->
-    <!--            FOREIGN KEY (customer_id) REFERENCES customer (username)-->
-    <!--            );-->
-    <!--        </sql>-->
-    <!--    </changeSet>-->
+<!--        <changeSet id="9" author="mariayun">-->
+<!--            <sql>-->
+<!--                CREATE TABLE IF NOT EXISTS message (-->
+<!--                id INT PRIMARY KEY AUTO_INCREMENT,-->
+<!--                customer_id VARCHAR(125) NOT NULL,-->
+<!--                FOREIGN KEY (customer_id) REFERENCES customer (id)-->
+<!--                );-->
+<!--            </sql>-->
+<!--        </changeSet>-->
 </databaseChangeLog>

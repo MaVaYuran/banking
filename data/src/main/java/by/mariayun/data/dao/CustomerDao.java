@@ -5,13 +5,15 @@ import by.mariayun.data.dto.CustomerDto;
 import by.mariayun.data.entity.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CustomerDao {
     List<CustomerDto> getAllCustomers();
-    CustomerDto getCustomerByUsername(String username);
-    String addCustomer(CustomerDto customerDto);
+    CustomerDto getById(int id);
+    int addCustomer(CustomerDto customerDto);
     void updateCustomer(CustomerDto customerDto);
-    boolean deleteCustomer(String username);
+    boolean deleteCustomer(int id);
     Customer getUserByUsername(String username);
-    List<AccountDto> getAllAccounts(String customerId);
+    List<AccountDto> getAllAccounts(int customerId);
+
 }

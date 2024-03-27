@@ -17,7 +17,7 @@ public class EBankingTestDataSource extends EBankingDataSource {
     @Override
     protected Connection getEBankingConnection() throws SQLException {
         return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/ebanking_test",
+                "jdbc:mysql://localhost:3306/e_banking_test",
                 "root",
                 "root");
     }

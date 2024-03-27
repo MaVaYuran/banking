@@ -1,18 +1,14 @@
 package by.mariayun.data.dto;
 
-import by.mariayun.data.entity.Customer;
-import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 
-public class AccountDto implements Serializable {
+public final class AccountDto implements Serializable {
 
     private int id;
     private Integer balance;
-    private String customerId;
+    private int customerId;
 
 
     public int getId() {
@@ -31,11 +27,11 @@ public class AccountDto implements Serializable {
         this.balance = balance;
     }
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 }

@@ -10,18 +10,21 @@ import java.util.Objects;
 @Table(name = "customer")
 public class Customer implements Serializable {
     @Id
-//@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
     @Column(name = "username")
     private String username;
 
-    @Column(name = "pass")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "firstname")
+    private String firstname;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "lastname")
+    private String lastname;
 
     @Column(name = "email")
     private String email;
@@ -32,6 +35,14 @@ public class Customer implements Serializable {
 
     @OneToMany(mappedBy = "customer")
     List<Account> accounts;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Role getRole() {
         return role;
@@ -57,20 +68,20 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -99,8 +110,8 @@ public class Customer implements Serializable {
 
         if (!Objects.equals(username, customer.username)) return false;
         if (!Objects.equals(password, customer.password)) return false;
-        if (!Objects.equals(firstName, customer.firstName)) return false;
-        if (!Objects.equals(lastName, customer.lastName)) return false;
+        if (!Objects.equals(firstname, customer.firstname)) return false;
+        if (!Objects.equals(lastname, customer.lastname)) return false;
         if (!Objects.equals(email, customer.email)) return false;
         if (!Objects.equals(role, customer.role)) return false;
         return Objects.equals(accounts, customer.accounts);
@@ -110,34 +121,14 @@ public class Customer implements Serializable {
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (accounts != null ? accounts.hashCode() : 0);
         return result;
     }
-    // Getters and Setters
-    // (Omitted for brevity)
 
-    // Additional Methods (can include other methods like deposit, withdraw, etc.)
-//    public void deposit(double amount) {
-//        if (amount > 0) {
-//            this.accountBalance += amount;
-//            System.out.println("Deposit of $" + amount + " successful. New balance: $" + this.accountBalance);
-//        } else {
-//            System.out.println("Invalid deposit amount. Please enter a positive value.");
-//        }
-//    }
-//
-//    public void withdraw(double amount) {
-//        if (amount > 0 && amount <= this.accountBalance) {
-//            this.accountBalance -= amount;
-//            System.out.println("Withdrawal of $" + amount + " successful. New balance: $" + this.accountBalance);
-//        } else {
-//            System.out.println("Invalid withdrawal amount or insufficient funds.");
-//        }
-//    }
 
 }
 

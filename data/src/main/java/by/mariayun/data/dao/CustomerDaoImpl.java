@@ -4,15 +4,16 @@ import by.mariayun.data.dto.AccountDto;
 import by.mariayun.data.dto.CustomerDto;
 import by.mariayun.data.entity.Customer;
 import by.mariayun.data.entity.Role;
-import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Repository
 @Transactional
@@ -27,7 +28,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public List<CustomerDto> getAllCustomers() {
         Session session = sessionFactory.getCurrentSession();
-        List<Customer> list = session.createQuery("FROM customer", Customer.class).getResultList();
+        List<Customer> list = session.createQuery("FROM Customer", Customer.class).getResultList();
 
         return convertToDtoList(list);
     }
@@ -42,10 +43,11 @@ public class CustomerDaoImpl implements CustomerDao {
 
     private CustomerDto convertToDto(Customer customer) {
         CustomerDto customerDto = new CustomerDto();
+        customerDto.setId(customer.getId());
         customerDto.setUsername(customer.getUsername());
         customerDto.setPassword(customer.getPassword());
-        customerDto.setFirstName(customer.getFirstName());
-        customerDto.setLastName(customer.getLastName());
+        customerDto.setFirstname(customer.getFirstname());
+        customerDto.setLastname(customer.getLastname());
         customerDto.setEmail(customer.getEmail());
         customerDto.setRoleId(customer.getRole().getId());
 
@@ -54,26 +56,26 @@ public class CustomerDaoImpl implements CustomerDao {
 
 
     @Override
-    public CustomerDto getCustomerByUsername(String username) {
-        Session session = sessionFactory.getCurrentSession();
-        Customer customer = session.get(Customer.class, username);
+    public CustomerDto getById(int id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Customer customer = session.get(Customer.class, id);
         return customer != null ? convertToDto(customer) : null;
 
     }
 
     @Override
-    public String addCustomer(CustomerDto customerDto) {
+    public int addCustomer(CustomerDto customerDto) {
         Session session = this.sessionFactory.getCurrentSession();
         Customer customer = mapToEntity(customerDto);
-        return (String) session.save(customer);
+        return (int) session.save(customer);
     }
 
     private Customer mapToEntity(CustomerDto customerDto) {
         Customer customer = new Customer();
         customer.setUsername(customerDto.getUsername());
         customer.setPassword(customerDto.getPassword());
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
+        customer.setFirstname(customerDto.getFirstname());
+        customer.setLastname(customerDto.getLastname());
         customer.setEmail(customerDto.getEmail());
         Session session = this.sessionFactory.getCurrentSession();
         Role role = session.get(Role.class, customerDto.getRoleId());
@@ -86,15 +88,16 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public void updateCustomer(CustomerDto customerDto) {
         Session session = sessionFactory.getCurrentSession();
-        Customer customer = session.get(Customer.class, customerDto.getUsername());
+        Customer customer = session.get(Customer.class, customerDto.getId());
         if (customer != null) {
+            customer.setUsername(customerDto.getUsername());
             customer.setPassword(customerDto.getPassword());
-            customer.setFirstName(customerDto.getFirstName());
-            customer.setLastName(customerDto.getLastName());
+            customer.setFirstname(customerDto.getFirstname());
+            customer.setLastname(customerDto.getLastname());
             customer.setEmail(customerDto.getEmail());
             session = this.sessionFactory.getCurrentSession();
             Role role = session.get(Role.class, customerDto.getRoleId());
-            if(role != null) {
+            if (role != null) {
                 customer.setRole(role);
             }
             session.update(customer);
@@ -102,9 +105,9 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public boolean deleteCustomer(String username) {
+    public boolean deleteCustomer(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Customer customer = session.get(Customer.class, username);
+        Customer customer = session.get(Customer.class, id);
         if (customer != null) {
             session.delete(customer);
             return true;
@@ -122,7 +125,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public List<AccountDto> getAllAccounts(String customerId) {
+    public List<AccountDto> getAllAccounts(int customerId) {
         Session session = sessionFactory.getCurrentSession();
         Customer customer = session.get(Customer.class, customerId);
         if (customer != null) {
@@ -133,4 +136,5 @@ public class CustomerDaoImpl implements CustomerDao {
         }
         return new ArrayList<>();
     }
+
 }
